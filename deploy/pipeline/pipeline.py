@@ -473,7 +473,9 @@ class PipePredictor(object):
 
     def set_file_name(self, path):
         if path is not None:
-            self.file_name = os.path.split(path)[-1].split(".")[-2]
+            self.file_name = os.path.split(path)[-1]
+            if "." in self.file_name:
+                self.file_name = self.file_name.split(".")[-2]
         else:
             # use camera id
             self.file_name = None
@@ -612,7 +614,7 @@ class PipePredictor(object):
         records = list()
         if self.do_entrance_counting or self.do_break_in_counting or self.illegal_parking_time != -1:
             if self.region_type == 'horizontal':
-                entrance = [0, height / 2., width, height / 2.]
+                entrance = [0, height *0.6, width, height *0.6]
             elif self.region_type == 'vertical':
                 entrance = [width / 2, 0., width / 2, height]
             elif self.region_type == 'custom':
