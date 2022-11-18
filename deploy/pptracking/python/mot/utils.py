@@ -318,7 +318,7 @@ def flow_statistic(result,
     info = "Frame id: {}, Total count: {}".format(frame_id, len(id_set))
     if do_entrance_counting:
         info += ", In count: {}, Out count: {}".format(
-            len(in_id_list), len(out_id_list))
+            len(set(in_id_list)), len(set(out_id_list)))
     if do_break_in_counting:
         info += ", Break_in count: {}".format(len(in_id_list))
     if frame_id % video_fps == 0 and frame_id / video_fps % secs_interval == 0:
@@ -332,8 +332,8 @@ def flow_statistic(result,
     return {
         "id_set": id_set,
         "interval_id_set": interval_id_set,
-        "in_id_list": in_id_list,
-        "out_id_list": out_id_list,
+        "in_id_list": set(in_id_list),
+        "out_id_list": set(out_id_list),
         "prev_center": prev_center,
         "records": records,
     }
